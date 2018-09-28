@@ -5,7 +5,7 @@ module.exports = {
         "es6": true,
         "amd": true
     },
-    "extends": "eslint:recommended",
+    "extends": "airbnb-base",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
