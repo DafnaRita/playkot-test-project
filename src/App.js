@@ -20,8 +20,8 @@ const App = () => {
       <div>
         <Route path='/auth' component={Auth}></Route>
         <Switch>
-          <Route path='/user/:number' component={User}></Route>
-          <Route path='/user' component={UserList}></Route>
+          <Route path='/users/:number' component={User}></Route>
+          <Route path='/users' component={UserList}></Route>
         </Switch>
       </div>
     </ Router>
