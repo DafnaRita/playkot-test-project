@@ -4,28 +4,60 @@ import {
   Route,
   Link,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 import './App.css';
 
 import Auth from './components/Auth';
-import UserList from './components/UserList';
 import User from './components/User';
 
-const App = () => {
-  console.log('app');
-  return (
-    <Router>
-      <div>
-        <Route path='/auth' component={Auth}></Route>
-        <Switch>
-          <Route path='/users/:number' component={User}></Route>
-          <Route path='/users' component={UserList}></Route>
-        </Switch>
-      </div>
-    </ Router>
-  );
-};
+class App extends React.PureComponent {
+  constructor() {
+    console.log('App start');
+    super();
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
+
+  login = () => {
+    console.log('login');
+    this.setState({ isAuthenticated: true });
+  }
+
+  logout = () => {
+    console.log('logout');
+    this.setState({ isAuthenticated: false });
+  }
+
+  render() {
+    console.log('App render');
+    const { isAuthenticated } = this.state;
+    return (
+      <Router>
+        <div>
+          <Route exact path='/' component={() => (
+            isAuthenticated ? (
+              <Redirect to='/users'/>
+            ) : (
+              <Redirect to={{
+                pathname: '/auth',
+              }} />
+            )
+          )}/>
+          <Route
+            path="/auth"
+            render={props => <Auth {...props}
+              isAuthenticated={this.state.isAuthenticated}
+              login={this.login}
+              logout={this.logout}
+            />}/>
+          <Route path="/users" component={User}/>
+        </div>
+      </ Router>
+    );
+  }
+}
 
 export default App;
