@@ -1,17 +1,18 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import keys from '../../googleKeys.json';
 import styles from './Auth.css';
 
-
 const onFailure = (error) => {
   console.error(error);
-}
+};
 
-const Auth = props => (
-  props.isAuthenticated ? (
+const Auth = (props) => {
+  console.log('Auth start');
+
+  return props.isAuthenticated ? (
     <div>
       <p>Authenticated</p>
       <div>
@@ -19,6 +20,7 @@ const Auth = props => (
           buttonText="Logout"
           onLogoutSuccess={props.logout}>
         </GoogleLogout>
+        <Link to='/users'>Link</Link>
       </div>
     </div>
   )
@@ -32,7 +34,7 @@ const Auth = props => (
           onFailure={onFailure}
         />
       </div>
-    )
-);
+    );
+};
 
 export default Auth;
