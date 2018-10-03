@@ -11,7 +11,7 @@ const onFailure = (error) => {
 
 const Auth = (props) => {
   console.log('Auth start');
-
+  console.log('props.isAuthenticated - ', props.isAuthenticated);
   return props.isAuthenticated ? (
     <div>
       <p>Authenticated</p>
