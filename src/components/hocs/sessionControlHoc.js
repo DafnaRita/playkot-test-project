@@ -1,10 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-const removeToken = () => {
-
-};
-
 const isExpired = () => {
   //TODO: проверяем что в SS, если истек - удаляем и возвращаем true, если нет- false
   console.log("is Expired? - ", window.sessionStorage.getItem('tokenStatus'));
@@ -24,17 +20,22 @@ function sessionControlHoc (WrappedComponent) {
       };
     }
 
-    /*componentDidMount() {
+    componentDidMount() {
       const sessionInfo = JSON.parse(window.sessionStorage.getItem('sessionInfo'));
-    }*/
+      if (sessionInfo !== null && typeof sessionInfo === 'object') {
+        this.setState({ isAuthenticated: true });
+      }
+    }
 
-    login = () => {
+    login = (info) => {
       console.log('login');
+      window.sessionStorage.setItem('sessionInfo', JSON.stringify(info));
       this.setState({ isAuthenticated: true });
     }
 
     logout = () => {
       console.log('logout');
+      window.sessionStorage.removeItem('sessionInfo');
       this.setState({ isAuthenticated: false });
     }
 

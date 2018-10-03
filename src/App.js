@@ -33,7 +33,7 @@ class App extends Component {
           path="/users"
           {...this.props}
           render={() => <Users {...this.props}/>}/>
-        <Route exact path='/' component={(props) => {
+        <Route exact path='/' component={() => {
           return this.props.isAuthenticated ? (
             <Redirect to='/users'/>
           ) : (
