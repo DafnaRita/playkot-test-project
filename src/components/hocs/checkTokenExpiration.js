@@ -1,5 +1,9 @@
 import React from 'react';
 
+const removeToken = () => {
+
+};
+
 const isExpired = () => {
   //TODO: проверяем что в SS, если истек - удаляем и возвращаем true, если нет- false
   console.log("is Expired? - ", window.sessionStorage.getItem('tokenStatus'));
@@ -9,7 +13,7 @@ const isExpired = () => {
   return false;
 };
 
-function checkExpirationHoc (WrappedComponent) {
+function checkTokenExpirationHoc (WrappedComponent) {
   console.log('checkExpirationHoc start');
   return class Hoc extends React.Component {
     render() {
@@ -22,4 +26,4 @@ function checkExpirationHoc (WrappedComponent) {
   }
 };
 
-export default checkExpirationHoc;
+export default checkTokenExpirationHoc;

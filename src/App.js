@@ -1,17 +1,12 @@
 import React, { PureComponent } from 'react';
-import {
-  Route,
-  Link,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 import './App.css';
 
 import Auth from './components/Auth';
 import Users from './components/Users';
-import checkExpirationHoc from './components/hocs/checkExpirationHoc';
+import checkTokenExpiration from './components/hocs/checkTokenExpiration';
 
 class App extends PureComponent {
   constructor() {
@@ -76,4 +71,4 @@ class App extends PureComponent {
   }
 }
 
-export default withRouter(checkExpirationHoc(App));
+export default withRouter(checkTokenExpiration(App));

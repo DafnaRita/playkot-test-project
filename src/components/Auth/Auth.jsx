@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { Route, Link } from 'react-router-dom';
 
-import keys from '../../googleKeys.json';
+import googleKey from '../../googleKey.json';
 import styles from './Auth.css';
 
 const onFailure = (error) => {
@@ -28,7 +28,7 @@ const Auth = (props) => {
       <div>
         <p>Please, login</p>
         <GoogleLogin
-          clientId={keys.client_id}
+          clientId={googleKey.client_id}
           buttonText="Login"
           onSuccess={props.login}
           onFailure={onFailure}
