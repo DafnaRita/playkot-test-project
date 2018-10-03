@@ -2,27 +2,34 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 const isExpired = () => {
-  //TODO: проверяем что в SS, если истек - удаляем и возвращаем true, если нет- false
-  console.log("is Expired? - ", window.sessionStorage.getItem('tokenStatus'));
-  if (window.sessionStorage.getItem('tokenStatus') === 'expired') {
+  const sessionInfo = JSON.parse(window.sessionStorage.getItem('sessionInfo'));
+  if (!sessionInfo) {
     return true;
   }
-  return false;
+  if ((Date.now() - sessionInfo.tokenObj.expires_at) < 0) {
+    return false;
+  }
+  return true;
 };
 
-function sessionControlHoc (WrappedComponent) {
+function sessionControlHoc(WrappedComponent) {
   const hoc = class SessionControlHoc extends React.PureComponent {
     constructor() {
-      console.log('SessionControl start');
       super();
       this.state = {
         isAuthenticated: false,
       };
     }
 
+    componentWillUpdate(nextProps, nextState) {
+      if (isExpired()) {
+        this.setState({ isAuthenticated: false });
+      }
+    }
+
     componentDidMount() {
       const sessionInfo = JSON.parse(window.sessionStorage.getItem('sessionInfo'));
-      if (sessionInfo !== null && typeof sessionInfo === 'object') {
+      if (sessionInfo !== null && typeof sessionInfo === 'object' && !isExpired()) {
         this.setState({ isAuthenticated: true });
       }
     }
