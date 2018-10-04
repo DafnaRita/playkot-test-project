@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import update from 'immutability-helper';
-import PaginationComponent from '../PaginationComponent';
+
 import AccessDenied from '../AccessDenied';
+import Pagination from '../PaginationComponent';
+import InfoTable from '../InfoTable';
 
 import styles from './UserList.css';
 
 import CreateAPI from '../../app/API';
 
+//TODO move pagination and pagination's logic to HOC
 class UserList extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +39,7 @@ class UserList extends React.Component {
           return {
             ...previousState,
             usersOnPage: {
-              [this.state.currentPage]: responce.data,
+              [this.state.currentPage]: responce,
             },
             count: responce.pagination.count,
           };
@@ -47,7 +50,10 @@ class UserList extends React.Component {
       });
   }
 
-  updatePageInfo = (pageNumber) => {
+  fetchPageInfo = (pageNumber) => {
+    this.setState({
+      currentPage: update(this.state.currentPage, { $set: pageNumber }),
+    });
     if (this.state.usersOnPage[pageNumber]) {
       return;
     }
@@ -76,13 +82,16 @@ class UserList extends React.Component {
 
     return (
       <div>
-        Users(Authenticated)
+        Users(A uthenticated)
         <Link to='/auth'>Link</Link>
-        {this.state.count}
-        <PaginationComponent
+        {<InfoTable
+          colomnNames={['Id', 'Full Name', 'Email']}
+          info={this.state.usersOnPage[this.state.currentPage]}
+        />}
+        <Pagination
           totalItemsCount={this.state.count}
           itemsPerPage={this.state.countUserPerPage}
-          updatePageInfo={this.updatePageInfo}
+          fetchPageInfo={this.fetchPageInfo}
         />
       </div>
     );

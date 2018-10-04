@@ -10,7 +10,7 @@ const PaginationComponent = (props) => {
 
   const pageNumbers = numeration.reduce((acc, currNumber) => {
     acc.push(
-      <PaginationItem onClick={() => props.updatePageInfo(currNumber)} key={currNumber}>
+      <PaginationItem onClick={() => props.fetchPageInfo(currNumber)} key={currNumber}>
         <PaginationLink>{currNumber}</PaginationLink>
       </PaginationItem>,
     );

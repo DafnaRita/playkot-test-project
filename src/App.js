@@ -5,7 +5,7 @@ import './App.css';
 
 import Auth from './components/Auth';
 import UserList from './components/UserList';
-import sessionControlHoc from './components/hocs/sessionControlHoc';
+import sessionControlHoc from './app/hocs/sessionControlHoc';
 
 const App = (props) => {
   return (
