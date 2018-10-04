@@ -4,7 +4,7 @@ import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
 import Auth from './components/Auth';
-import Users from './components/Users';
+import UserList from './components/UserList';
 import sessionControlHoc from './components/hocs/sessionControlHoc';
 
 const App = (props) => {
@@ -20,7 +20,7 @@ const App = (props) => {
       <Route exact
         path="/users"
         {...props}
-        render={() => <Users {...props}/>}/>
+        render={() => <UserList {...props}/>}/>
       <Route exact path='/' component={() => {
         return props.isAuthenticated ? (
           <Redirect to='/users'/>
