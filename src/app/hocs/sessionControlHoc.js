@@ -18,32 +18,61 @@ function sessionControlHoc(WrappedComponent) {
       super();
       this.state = {
         isAuthenticated: false,
+        user: null,
       };
     }
 
     componentWillUpdate(nextProps, nextState) {
       if (isExpired()) {
-        this.setState({ isAuthenticated: false });
+        this.setState(() => {
+          return {
+            isAuthenticated: false,
+            user: null,
+          };
+        });
       }
     }
 
     componentDidMount() {
       const sessionInfo = JSON.parse(window.sessionStorage.getItem('sessionInfo'));
       if (sessionInfo !== null && typeof sessionInfo === 'object' && !isExpired()) {
-        this.setState({ isAuthenticated: true });
+        this.setState(() => {
+          return {
+            isAuthenticated: true,
+            user: {
+              email: sessionInfo.profileObj.email,
+              name: sessionInfo.profileObj.name,
+              imageUrl: sessionInfo.profileObj.imageUrl,
+            },
+          };
+        });
       }
     }
 
     login = (info) => {
       console.log('login');
       window.sessionStorage.setItem('sessionInfo', JSON.stringify(info));
-      this.setState({ isAuthenticated: true });
+      this.setState(() => {
+        return {
+          isAuthenticated: true,
+          user: {
+            email: info.profileObj.email,
+            name: info.profileObj.name,
+            imageUrl: info.profileObj.imageUrl,
+          },
+        };
+      });
     }
 
     logout = () => {
       console.log('logout');
       window.sessionStorage.removeItem('sessionInfo');
-      this.setState({ isAuthenticated: false });
+      this.setState(() => {
+        return {
+          isAuthenticated: false,
+          user: null,
+        };
+      });
     }
 
     render() {
@@ -52,6 +81,7 @@ function sessionControlHoc(WrappedComponent) {
           isAuthenticated={ !isExpired() && this.state.isAuthenticated }
           login={this.login}
           logout={this.logout}
+          user={this.state.user}
           {...this.state}>
           {this.children}
         </WrappedComponent>

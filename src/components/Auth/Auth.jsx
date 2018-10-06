@@ -12,21 +12,18 @@ const onFailure = (error) => {
 const Auth = (props) => {
   console.log('Auth start');
   console.log('props.isAuthenticated - ', props.isAuthenticated);
-  return props.isAuthenticated ? (
-    <div>
-      <p>Authenticated</p>
-      <div>
-        <GoogleLogout
-          buttonText="Logout"
-          onLogoutSuccess={props.logout}>
-        </GoogleLogout>
-        <Link to='/users'>Link</Link>
-      </div>
+
+  const button = props.isAuthenticated ? (
+    <div className='container mx-auto text-center pt-4'>
+      <GoogleLogout
+        buttonText="Logout"
+        onLogoutSuccess={props.logout}
+      />
     </div>
   )
     : (
-      <div>
-        <p>Please, login</p>
+      <div className='container mx-auto text-center pt-4'>
+        <p>Please, log in</p>
         <GoogleLogin
           clientId={googleKey.client_id}
           buttonText="Login"
@@ -35,6 +32,12 @@ const Auth = (props) => {
         />
       </div>
     );
+
+  return (
+    <div>
+      {button}
+    </div>
+  );
 };
 
 export default Auth;

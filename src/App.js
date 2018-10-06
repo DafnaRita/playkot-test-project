@@ -5,11 +5,13 @@ import './App.css';
 
 import Auth from './components/Auth';
 import UserList from './components/UserList';
+import Header from './components/Header';
 import sessionControlHoc from './app/hocs/sessionControlHoc';
 
 const App = (props) => {
   return (
     <div>
+      <Header {...props}/>
       <Route exact
         path="/auth"
         {...props}

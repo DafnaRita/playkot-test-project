@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
-
 import styles from './PaginationComponent.css';
 
 const PaginationComponent = (props) => {
@@ -10,26 +8,20 @@ const PaginationComponent = (props) => {
 
   const pageNumbers = numeration.reduce((acc, currNumber) => {
     acc.push(
-      <PaginationItem onClick={() => props.fetchPageInfo(currNumber)} key={currNumber}>
-        <PaginationLink>{currNumber}</PaginationLink>
-      </PaginationItem>,
+      <li className="page-item" onClick={() => props.fetchPageInfo(currNumber)} key={currNumber}>
+        <a className="page-link" href="#">{currNumber}</a>
+      </li>,
     );
 
     return acc;
   }, []);
 
   return (
-    <div>
-      <Pagination aria-label="Page navigation example">
-        <PaginationItem>
-          <PaginationLink previous/>
-        </PaginationItem>
+    <nav aria-label="Page navigation example">
+      <ul className="pagination justify-content-center">
         {pageNumbers}
-        <PaginationItem>
-          <PaginationLink next/>
-        </PaginationItem>
-      </Pagination>
-    </div>
+      </ul>
+    </nav >
   );
 };
 

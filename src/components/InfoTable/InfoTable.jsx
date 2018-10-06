@@ -5,26 +5,14 @@ import styles from './InfoTable.css';
 
 const InfoTable = (props) => {
   const { info: usersInfo } = props;
-  /*const rows = props.data.reduce((acc, name) => {
-    console.log('data row - ', name);
-    acc.push(
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>,
-    );
-    return [];
-  }, []);*/
 
   return (
-    <div>
-      <Table hover>
+    <div className='container-fluid'>
+      <Table hover responsive size="sm">
         <thead>
           <tr>
             {
-              props.colomnNames.reduce((acc, name, i) => {
+              props.colomnNames.reduce((acc, name) => {
                 acc.push(<th key={`${name}`}>{name}</th>);
                 return acc;
               }, [])

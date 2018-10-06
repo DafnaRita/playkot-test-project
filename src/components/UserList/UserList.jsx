@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 
 import AccessDenied from '../AccessDenied';
-import Pagination from '../PaginationComponent';
+import PaginationComponent from '../PaginationComponent';
 import InfoTable from '../InfoTable';
 
 import styles from './UserList.css';
@@ -77,18 +77,20 @@ class UserList extends React.Component {
 
   render() {
     if (!this.state.isAuthenticated) {
-      return (<AccessDenied message='Please,' linkLabel='sign up'/>);
+      return (
+        <div className='container'>
+          <AccessDenied message='Please,' linkLabel='sign up'/>
+        </div>
+      );
     }
 
     return (
-      <div>
-        Users(A uthenticated)
-        <Link to='/auth'>Link</Link>
+      <div className='container'>
         {<InfoTable
           colomnNames={['Id', 'Full Name', 'Email']}
           info={this.state.usersOnPage[this.state.currentPage]}
         />}
-        <Pagination
+        <PaginationComponent
           totalItemsCount={this.state.count}
           itemsPerPage={this.state.countUserPerPage}
           fetchPageInfo={this.fetchPageInfo}
