@@ -9,9 +9,6 @@ const onFailure = (error) => {
 };
 
 const Auth = (props) => {
-  console.log('Auth start');
-  console.log('props.isAuthenticated - ', props.isAuthenticated);
-
   const button = props.isAuthenticated ? (
     <div className='container mx-auto text-center pt-4'>
       <GoogleLogout

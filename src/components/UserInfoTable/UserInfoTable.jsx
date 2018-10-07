@@ -5,7 +5,7 @@ import styles from './UserInfoTable.css';
 
 const UserInfoTable = (props) => {
   const { info: usersInfo } = props;
-  console.log('info - ', props)
+
   return (
     <div className='container-fluid'>
       <Table hover responsive size="sm">
@@ -22,7 +22,7 @@ const UserInfoTable = (props) => {
         <tbody>
           {
             usersInfo ? (
-              usersInfo.data.reduce((acc, user, i) => {
+              usersInfo.reduce((acc, user, i) => {
                 acc.push(
                   <tr
                     key={user.id}

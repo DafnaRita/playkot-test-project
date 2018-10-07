@@ -8,7 +8,7 @@ import UserInfoTable from '../UserInfoTable';
 
 import styles from './UserList.css';
 
-import CreateAPI from '../../app/API';
+import fetchInfoHoc from '../../app/hocs/fetchInfoHoc';
 
 //TODO move pagination and pagination's logic to HOC
 class UserList extends React.Component {
@@ -23,33 +23,33 @@ class UserList extends React.Component {
       countUserPerPage: 10,
       currentPage: 1,
     };
-    this.api = new CreateAPI({ url: 'https://front-test.now.sh' });
-    this.api.createEntity({ name: 'users' });
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ isAuthenticated: nextProps.isAuthenticated });
+    if (this.state.usersOnPage.length < 1) {
+      this.setState({
+        usersOnPage: {
+          [this.state.currentPage]: nextProps.responce,
+        },
+        count: nextProps.totalItems,
+      });
+    } else {
+      this.setState({
+        usersOnPage: update(this.state.usersOnPage, {
+          [this.state.currentPage]: {
+            $set: nextProps.responce,
+          },
+        }),
+      });
+    }
   }
 
   componentDidMount() {
-    this.api.endpoints.users.getByOffset({ offset: 0 })
-      .then(({ data: responce }) => {
-        this.setState((previousState) => {
-          return {
-            ...previousState,
-            usersOnPage: {
-              [this.state.currentPage]: responce,
-            },
-            count: responce.pagination.count,
-          };
-        });
-      })
-      .catch(({ error }) => {
-        console.error(`Some error - ${error}`);
-      });
+    this.props.getItemListByOffset(0);
   }
 
-  fetchPageInfo = (pageNumber) => {
+  changePageNumber = (pageNumber) => {
     this.setState({
       currentPage: update(this.state.currentPage, { $set: pageNumber }),
     });
@@ -57,21 +57,7 @@ class UserList extends React.Component {
       return;
     }
 
-    this.api.endpoints.users.getByOffset(
-      { offset: this.state.countUserPerPage * (pageNumber - 1) },
-    )
-      .then(({ data: responce }) => {
-        this.setState({
-          usersOnPage: update(this.state.usersOnPage, {
-            [pageNumber]: {
-              $set: responce,
-            },
-          }),
-        });
-      })
-      .catch(({ error }) => {
-        console.error(`Some error - ${error}`);
-      });
+    this.props.getItemListByOffset(this.state.countUserPerPage * (pageNumber - 1));
   }
 
   getActiveRow = (number) => {
@@ -97,11 +83,14 @@ class UserList extends React.Component {
         <PaginationComponent
           totalItemsCount={this.state.count}
           itemsPerPage={this.state.countUserPerPage}
-          fetchPageInfo={this.fetchPageInfo}
+          changePageNumber={this.changePageNumber}
         />
       </div>
     );
   }
 }
 
-export default UserList;
+export default fetchInfoHoc({
+  url: 'https://front-test.now.sh',
+  name: 'users',
+})(UserList);

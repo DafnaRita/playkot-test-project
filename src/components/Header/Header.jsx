@@ -4,7 +4,6 @@ import { Route, Link } from 'react-router-dom';
 import styles from './Header.css';
 
 const Header = (props) => {
-  console.log('props - ', props);
   return (
     <nav className='navbar navbar-expand  navbar-light bg-light'>
       <div className='container-fluid'>
@@ -16,9 +15,9 @@ const Header = (props) => {
           render={() => {
             return (props.isAuthenticated
               ? 
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                  <li class="nav-item">
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                  <li className="nav-item">
                     <Link to='/users' className="nav-item nav-link">Users</Link>
                   </li>
                 </ul>
