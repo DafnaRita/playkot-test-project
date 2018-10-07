@@ -10,7 +10,6 @@ import styles from './UserList.css';
 
 import fetchInfoHoc from '../../app/hocs/fetchInfoHoc';
 
-//TODO move pagination and pagination's logic to HOC
 class UserList extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +45,9 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getItemListByOffset(0);
+    if (this.state.isAuthenticated) {
+      this.props.getItemListByOffset(0);
+    }
   }
 
   changePageNumber = (pageNumber) => {
