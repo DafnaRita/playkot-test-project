@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import update from 'immutability-helper';
 
 import PaginationComponent from '../PaginationComponent';
-import UserInfoTable from '../UserInfoTable';
+import InfoTable from '../InfoTable';
 
 import styles from './UserList.css';
 
@@ -75,7 +75,7 @@ class UserList extends React.Component {
 
     return (
       <div className='container'>
-        {<UserInfoTable
+        {<InfoTable
           colomnNames={['#', 'Id', 'Full Name', 'Email']}
           info={this.state.usersOnPage[this.state.currentPage]}
           getActiveRow={this.getActiveRow}

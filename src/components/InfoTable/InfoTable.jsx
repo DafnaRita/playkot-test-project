@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 
-import styles from './UserInfoTable.css';
+import styles from './InfoTable.css';
 
-const UserInfoTable = (props) => {
+const InfoTable = (props) => {
   const { info: usersInfo } = props;
 
   return (
@@ -43,4 +43,4 @@ const UserInfoTable = (props) => {
   );
 };
 
-export default UserInfoTable;
+export default InfoTable;

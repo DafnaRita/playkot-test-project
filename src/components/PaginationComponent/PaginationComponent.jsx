@@ -5,8 +5,7 @@ import styles from './PaginationComponent.css';
 const PaginationComponent = (props) => {
   const pageCount = Math.ceil(props.totalItemsCount / props.itemsPerPage);
   const numeration = Array.from({ length: pageCount }, (v, k) => k + 1);
-  console.log('pageCount - ', pageCount);
-  console.log('numeration - ', numeration);
+
   const pageNumbers = numeration.reduce((acc, currNumber) => {
     acc.push(
       <li className="page-item" onClick={() => props.changePageNumber(currNumber)} key={currNumber}>
