@@ -1,6 +1,5 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { Route, Link } from 'react-router-dom';
 
 import googleKey from '../../googleKey.json';
 import styles from './Auth.css';

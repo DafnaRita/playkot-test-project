@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import update from 'immutability-helper';
 
-import AccessDenied from '../AccessDenied';
 import PaginationComponent from '../PaginationComponent';
-import InfoTable from '../InfoTable';
+import UserInfoTable from '../UserInfoTable';
 
 import styles from './UserList.css';
 
@@ -75,20 +74,25 @@ class UserList extends React.Component {
       });
   }
 
+  getActiveRow = (number) => {
+    console.log('мы на строке номер - ', number);
+  }
+
   render() {
     if (!this.state.isAuthenticated) {
       return (
         <div className='container'>
-          <AccessDenied message='Please,' linkLabel='sign up'/>
+          <Redirect to='/auth'/>
         </div>
       );
     }
 
     return (
       <div className='container'>
-        {<InfoTable
-          colomnNames={['Id', 'Full Name', 'Email']}
+        {<UserInfoTable
+          colomnNames={['#', 'Id', 'Full Name', 'Email']}
           info={this.state.usersOnPage[this.state.currentPage]}
+          getActiveRow={this.getActiveRow}
         />}
         <PaginationComponent
           totalItemsCount={this.state.count}
