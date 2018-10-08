@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import UserLocation from '../UserLocation';
 import ImageLoader from '../ImageLoader';
+import Description from '../Description';
 
 import sessionDataSaver from '../../app/hocs/sessionDataSaverHoc';
 
@@ -34,6 +35,7 @@ const PersonalPage = (props) => {
           </p>
           <div>
             <h6>Description:</h6>
+            <Description {...props}/>
           </div>
         </div>
       </div>

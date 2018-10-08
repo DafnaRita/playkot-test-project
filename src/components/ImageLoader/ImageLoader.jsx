@@ -34,7 +34,7 @@ class ImageLoader extends React.Component {
 
   componentDidMount() {
     const data = this.syncData();
-    console.log('componentDidMount - ', data);
+
     if (!data) {
       return;
     }
