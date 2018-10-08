@@ -22,18 +22,7 @@ function sessionControlHoc(WrappedComponent) {
       };
     }
 
-    componentWillUpdate(nextProps, nextState) {
-      if (isExpired()) {
-        this.setState(() => {
-          return {
-            isAuthenticated: false,
-            user: null,
-          };
-        });
-      }
-    }
-
-    componentDidMount() {
+    componentWillMount() {
       const sessionInfo = JSON.parse(window.sessionStorage.getItem('sessionInfo'));
       if (sessionInfo !== null && typeof sessionInfo === 'object' && !isExpired()) {
         this.setState(() => {
@@ -44,6 +33,17 @@ function sessionControlHoc(WrappedComponent) {
               name: sessionInfo.profileObj.name,
               imageUrl: sessionInfo.profileObj.imageUrl,
             },
+          };
+        });
+      }
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+      if (isExpired()) {
+        this.setState(() => {
+          return {
+            isAuthenticated: false,
+            user: null,
           };
         });
       }
@@ -76,13 +76,15 @@ function sessionControlHoc(WrappedComponent) {
     }
 
     render() {
+      console.log('this.state.isAuthenticated - ', this.state.isAuthenticated)
       return (
         <WrappedComponent
           isAuthenticated={ !isExpired() && this.state.isAuthenticated }
           login={this.login}
           logout={this.logout}
           user={this.state.user}
-          {...this.state}>
+          {...this.state}
+          {...this.props}>
           {this.children}
         </WrappedComponent>
       );

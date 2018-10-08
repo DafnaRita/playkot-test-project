@@ -26,7 +26,7 @@ const InfoTable = (props) => {
                 acc.push(
                   <tr
                     key={user.id}
-                    onClick={() => props.getActiveRow(i)}
+                    onClick={() => props.getActiveRow(i, user.id)}
                   >
                     <td>{ i + 1 }</td>
                     <td>{user.id}</td>

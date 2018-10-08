@@ -61,8 +61,13 @@ class UserList extends React.Component {
     this.props.getItemListByOffset(this.state.countUserPerPage * (pageNumber - 1));
   }
 
-  getActiveRow = (number) => {
-    console.log('мы на строке номер - ', number);
+  getActiveRow = (i, id) => {
+    console.log('мы на строке номер - ', i);
+    console.log('юзер с id-шкой - ', id);
+    this.props.history.push({
+      pathname: `/users/${id}`,
+      state: this.state.usersOnPage[this.state.currentPage][i],
+    });
   }
 
   render() {

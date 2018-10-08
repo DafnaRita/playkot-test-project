@@ -9,11 +9,13 @@ const onFailure = (error) => {
 };
 
 const Auth = (props) => {
+  console.log('Auth - ', props);
   const button = props.isAuthenticated ? (
     <div className='container mx-auto text-center pt-4'>
       <GoogleLogout
         buttonText="Logout"
         onLogoutSuccess={props.logout}
+        onFailure={onFailure}
       />
     </div>
   )
