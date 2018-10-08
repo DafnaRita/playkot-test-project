@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route, Link, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import './App.css';
+import PropTypes from 'prop-types';
 
 import Auth from './components/Auth';
 import UserList from './components/UserList';
@@ -31,7 +31,6 @@ const App = (props) => {
           render={() => <PersonalPage {...props}/>}/>
       </Switch>
       <Route exact path='/' component={() => {
-        console.log('props.isAuthenticated - ', props.isAuthenticated)
         return props.isAuthenticated ? (
           <Redirect to='/users'/>
         ) : (
@@ -42,6 +41,12 @@ const App = (props) => {
       }}/>
     </div>
   );
+};
+
+App.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default sessionControlHoc(App);

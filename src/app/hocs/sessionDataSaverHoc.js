@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 function sessionDataSaver (WrappedComponent) {
   const hoc = class sessionDataSaverHoc extends React.PureComponent {
     constructor(props) {
@@ -35,6 +37,14 @@ function sessionDataSaver (WrappedComponent) {
     }
   };
   return hoc;
+
+  hoc.propTypes = {
+    location: PropTypes.shape({
+      state: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    }).isRequired,
+  };
 };
 
 export default sessionDataSaver;

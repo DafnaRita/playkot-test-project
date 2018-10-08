@@ -38,7 +38,7 @@ function sessionControlHoc(WrappedComponent) {
       }
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    componentWillUpdate() {
       if (isExpired()) {
         this.setState(() => {
           return {
@@ -76,7 +76,6 @@ function sessionControlHoc(WrappedComponent) {
     }
 
     render() {
-      console.log('this.state.isAuthenticated - ', this.state.isAuthenticated)
       return (
         <WrappedComponent
           isAuthenticated={ !isExpired() && this.state.isAuthenticated }

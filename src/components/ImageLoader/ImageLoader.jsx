@@ -166,8 +166,8 @@ class ImageLoader extends React.Component {
     );
 
     return (
-      <div className='container-fluid'>
-        <div className='row'>
+      <div className="container-fluid">
+        <div className="row">
           {(this.state.imageURL && !this.state.modal)
             ? <img style={imageStyle} src={this.state.imageURL}/>
             : <Button
