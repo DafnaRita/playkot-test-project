@@ -62,8 +62,6 @@ class UserList extends React.Component {
   }
 
   getActiveRow = (i, id) => {
-    console.log('мы на строке номер - ', i);
-    console.log('юзер с id-шкой - ', id);
     this.props.history.push({
       pathname: `/users/${id}`,
       state: this.state.usersOnPage[this.state.currentPage][i],

@@ -25,7 +25,29 @@ class ImageLoader extends React.Component {
       imageURL: null,
       activeTab: TAB_TYPES.FILE,
       isValidImage: false,
+      userDescription: null,
     };
+
+    this.saveData = props.saveData;
+    this.syncData = props.syncData;
+  }
+
+  componentDidMount() {
+    const data = this.syncData();
+    console.log('componentDidMount - ', data);
+    if (!data) {
+      return;
+    }
+    if (data.hasOwnProperty('imageURL')) {
+      this.setState(() => ({
+        imageURL: data.imageURL,
+      }));
+    }
+    if (data.hasOwnProperty('userDescription')) {
+      this.setState(() => ({
+        userDescription: data.userDescription,
+      }));
+    }
   }
 
   toggleModal = () => {
@@ -76,7 +98,7 @@ class ImageLoader extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('handle uploading-', this.state.imageURL);
+    this.saveData('imageURL', this.state.imageURL);
     this.toggleModal();
   }
 

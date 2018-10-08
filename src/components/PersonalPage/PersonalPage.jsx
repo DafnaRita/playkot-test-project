@@ -4,10 +4,11 @@ import { Redirect } from 'react-router-dom';
 import UserLocation from '../UserLocation';
 import ImageLoader from '../ImageLoader';
 
+import sessionDataSaver from '../../app/hocs/sessionDataSaverHoc';
+
 import styles from './PersonalPage.css';
 
 const PersonalPage = (props) => {
-  console.log('props - ', props.location.state);
   const user = props.location.state;
   if (!props.isAuthenticated) {
     return (
@@ -21,7 +22,7 @@ const PersonalPage = (props) => {
     <div className="container">
       <div className="row">
         <div className="col-sm-6 col-md-4 d-none d-sm-block">
-          <ImageLoader/>
+          <ImageLoader {...props}/>
         </div>
         <div className="col-sm-6 col-md-8">
           <blockquote>
@@ -40,11 +41,13 @@ const PersonalPage = (props) => {
       <div className="row">
         <div className="col-sm-12 mx-auto">
           <h5>Geolocation:</h5>
-          <UserLocation location={user.location} />
+          <UserLocation
+            location={user.location}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default PersonalPage;
+export default sessionDataSaver(PersonalPage);
