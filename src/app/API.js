@@ -18,7 +18,6 @@ class API {
     const resourceURL = `${this.url}/${name}`;
 
     endpoint.getByOffset = ({ offset }) => {
-      console.log(`${resourceURL}/?token=${token}&offset=${offset}`)
       return axios.get(`${resourceURL}/?token=${token}&offset=${offset}`);
     };
 

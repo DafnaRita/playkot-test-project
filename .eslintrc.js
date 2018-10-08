@@ -42,5 +42,6 @@ module.exports = {
             "varsIgnorePattern": "^React$"
           }
         ],
+        "jsx-a11y/alt-text": "off",
     }
 };

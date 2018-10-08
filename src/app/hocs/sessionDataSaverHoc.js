@@ -6,6 +6,9 @@ function sessionDataSaver (WrappedComponent) {
   const hoc = class sessionDataSaverHoc extends React.PureComponent {
     constructor(props) {
       super();
+      if(!props.isAuthenticated) {
+        return;
+      }
       this.state = {
         dataId: props.location.state.id,
       };
@@ -36,15 +39,17 @@ function sessionDataSaver (WrappedComponent) {
       );
     }
   };
-  return hoc;
 
   hoc.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
     location: PropTypes.shape({
       state: PropTypes.shape({
         id: PropTypes.string,
       }),
     }).isRequired,
   };
+
+  return hoc;
 };
 
 export default sessionDataSaver;

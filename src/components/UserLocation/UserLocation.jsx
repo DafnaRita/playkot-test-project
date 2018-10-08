@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 const UserLocation = (props) => (
   <Map
-    onAPIAvailable={function () { console.log('API loaded'); }}
     center={props.location}
     zoom={4}
     width='100%'

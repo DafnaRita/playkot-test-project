@@ -50,7 +50,6 @@ function sessionControlHoc(WrappedComponent) {
     }
 
     login = (info) => {
-      console.log('login');
       window.sessionStorage.setItem('sessionInfo', JSON.stringify(info));
       this.setState(() => {
         return {
@@ -65,7 +64,6 @@ function sessionControlHoc(WrappedComponent) {
     }
 
     logout = () => {
-      console.log('logout');
       window.sessionStorage.removeItem('sessionInfo');
       this.setState(() => {
         return {

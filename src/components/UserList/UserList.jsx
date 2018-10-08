@@ -25,7 +25,6 @@ class UserList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('props - ', nextProps);
     this.setState({ isAuthenticated: nextProps.isAuthenticated });
     if (this.state.usersOnPage.length < 1) {
       this.setState({
