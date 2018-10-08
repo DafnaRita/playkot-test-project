@@ -4,6 +4,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter,
   Nav, NavItem, NavLink, Button, Row, Col, Input } from 'reactstrap';
 
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 import imageURLchecker from '../../app/imageURLchecker';
 
@@ -210,5 +211,11 @@ class ImageLoader extends React.Component {
     );
   }
 }
+
+ImageLoader.propTypes = {
+  saveData: PropTypes.func.isRequired,
+  syncData: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
 
 export default ImageLoader;

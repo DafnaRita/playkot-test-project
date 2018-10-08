@@ -1,8 +1,9 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
+import PropTypes from 'prop-types';
+
 import googleKey from '../../googleKey.json';
-import styles from './Auth.css';
 
 const onFailure = (error) => {
   console.error(error);
@@ -36,6 +37,12 @@ const Auth = (props) => {
       {button}
     </div>
   );
+};
+
+Auth.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 export default Auth;

@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom';
 
 import update from 'immutability-helper';
 
+import PropTypes from 'prop-types';
+
 import PaginationComponent from '../PaginationComponent';
 import InfoTable from '../InfoTable';
-
-import styles from './UserList.css';
 
 import fetchInfoHoc from '../../app/hocs/fetchInfoHoc';
 
@@ -25,6 +25,7 @@ class UserList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('props - ', nextProps);
     this.setState({ isAuthenticated: nextProps.isAuthenticated });
     if (this.state.usersOnPage.length < 1) {
       this.setState({
@@ -93,6 +94,21 @@ class UserList extends React.Component {
     );
   }
 }
+
+UserList.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  responce: PropTypes.arrayOf(PropTypes.shape({
+    location: PropTypes.arrayOf(PropTypes.string),
+    lastName: PropTypes.string,
+    firstName: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.string,
+    fullName: PropTypes.string,
+  })),
+  history: PropTypes.object.isRequired,
+  getItemListByOffset: PropTypes.func.isRequired,
+  totalItems: PropTypes.number,
+};
 
 export default fetchInfoHoc({
   url: 'https://front-test.now.sh',

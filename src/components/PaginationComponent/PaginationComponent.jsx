@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './PaginationComponent.css';
+import PropTypes from 'prop-types';
 
 const PaginationComponent = (props) => {
   const pageCount = Math.ceil(props.totalItemsCount / props.itemsPerPage);
@@ -23,6 +23,11 @@ const PaginationComponent = (props) => {
       </ul>
     </nav >
   );
+};
+
+PaginationComponent.propTypes = {
+  totalItemsCount: PropTypes.number,
+  itemsPerPage: PropTypes.number.isRequired,
 };
 
 export default PaginationComponent;

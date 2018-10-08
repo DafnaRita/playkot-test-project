@@ -5,7 +5,9 @@ module.exports = {
         "es6": true,
         "amd": true
     },
-    "extends": "airbnb-base",
+    "extends":  [
+      'plugin:react/recommended'
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -32,6 +34,14 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "no-unused-vars": [
+          1, {"vars": "all",
+            "args": "after-used",
+            "argsIgnorePattern": "^_|^next$",
+            "varsIgnorePattern": "^React$"
+          }
+        ],
+
     }
 };

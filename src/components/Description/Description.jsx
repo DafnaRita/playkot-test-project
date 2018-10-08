@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 
+import PropTypes from 'prop-types';
+
 const restoreDesctiption = (data) => {
   if (!data) {
     return null;
@@ -29,6 +31,11 @@ const Description = (props) => {
       />
     </FormGroup>
   );
+};
+
+Description.propTypes = {
+  saveData: PropTypes.func.isRequired,
+  syncData: PropTypes.func.isRequired,
 };
 
 export default Description;

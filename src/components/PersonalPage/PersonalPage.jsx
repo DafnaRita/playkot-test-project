@@ -5,9 +5,9 @@ import UserLocation from '../UserLocation';
 import ImageLoader from '../ImageLoader';
 import Description from '../Description';
 
-import sessionDataSaver from '../../app/hocs/sessionDataSaverHoc';
+import PropTypes from 'prop-types';
 
-import styles from './PersonalPage.css';
+import sessionDataSaver from '../../app/hocs/sessionDataSaverHoc';
 
 const PersonalPage = (props) => {
   const user = props.location.state;
@@ -50,6 +50,20 @@ const PersonalPage = (props) => {
       </div>
     </div>
   );
+};
+
+PersonalPage.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    state:  PropTypes.shape({
+      user: PropTypes.shape({
+        location: PropTypes.arrayOf(PropTypes.string),
+        lastName: PropTypes.string,
+        firstName: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
 };
 
 export default sessionDataSaver(PersonalPage);

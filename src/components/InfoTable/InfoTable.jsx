@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'reactstrap';
 
-import styles from './InfoTable.css';
+import PropTypes from 'prop-types';
 
 const InfoTable = (props) => {
   const { info: usersInfo } = props;
@@ -41,6 +41,11 @@ const InfoTable = (props) => {
       </Table>
     </div>
   );
+};
+
+InfoTable.propTypes = {
+  info: PropTypes.arrayOf(PropTypes.object),
+  colomnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default InfoTable;
